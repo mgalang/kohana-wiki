@@ -81,11 +81,7 @@ class Model_Wiki extends ORM {
 				array('max_length', array(':value', 128)),
 				array(array($this, 'title_available'), array(':validation', ':field')),
 				array(array($this, 'is_url'), array(':validation', ':field', ':value')),
-			),
-			'markdown' => array
-			(
-				array('not_empty')
-			),
+			)
 		);
 	}
 
