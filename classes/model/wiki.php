@@ -311,21 +311,18 @@ class Model_Wiki extends ORM {
 	 * @param    int    $id
 	 * @return   array
 	 */
-	protected function links($id)
+	public function links($id)
 	{
 		if ($id instanceof $this)
 		{
 			$id = $id->pk();
 		}
-
-		return DB::select('id', 'title')
-			->from($this->_table_name)
-			->where('id', 'IN', DB::expr(DB::select('remote_id')
-				->from('wiki_links')
-				->where('wiki_id', '=', DB::expr($this->_table_name.'.'.'id'))
-				))
-			->execute($this->_db)
-			->as_array('id', 'title');
+ 
+    return DB::select('link', 'wiki_id')
+      ->from('wiki_links')
+      ->where('wiki_id', '=', $id)
+      ->execute()
+      ->as_array('link');
 	}
 
 	/**
